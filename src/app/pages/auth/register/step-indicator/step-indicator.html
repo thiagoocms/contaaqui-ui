@@ -1,0 +1,13 @@
+@if (stepIndex > stepReference) {
+  <div class="bg-success rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
+    <fa-icon [icon]="faCheck" class="text-white"></fa-icon>
+  </div>
+} @else if (stepIndex === stepReference) {
+  <div class="org-bg-secondary rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
+    <fa-icon [icon]="faClipboardList" class="text-white"></fa-icon>
+  </div>
+} @else {
+  <div class="border-2 border-black rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px; border: solid">
+    {{stepReference}}
+  </div>
+}

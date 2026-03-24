@@ -1,0 +1,45 @@
+h6 {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+button {
+    outline: none;
+}
+
+.modal-header,
+.modal-footer {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+/* obfuscate background */
+.obfuscate-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(15px);
+}
+
+.modal-content {
+    height: fit-content !important;
+    width: 100% !important;
+}
+
+.container-modal {
+    z-index: 1001;
+}
+
+.container-modal .modal-content {
+    z-index: 1002;
+}
+
+.close {
+    font-size: 1.5rem;
+}
+
+.close:hover {
+    color: #dc3545;
+}

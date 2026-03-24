@@ -1,0 +1,35 @@
+.lottie-animation {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.55);
+  z-index: 1000;
+  position: fixed;
+
+  /* 👇 animação suave */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+/* 👇 quando ativo */
+.lottie-animation.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.box {
+  border-radius: 20px;
+  width: 40%;
+
+  /* opcional: leve zoom */
+  transform: scale(0.95);
+  transition: transform 0.4s ease;
+}
+
+/* animação junto com o fade */
+.lottie-animation.active .box {
+  transform: scale(1);
+}

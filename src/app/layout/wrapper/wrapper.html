@@ -1,0 +1,19 @@
+<section class="layout">
+  <header class="w-100 border-bottom bg-light">
+    <app-header></app-header>
+  </header>
+
+  <main>
+    <aside class="border-end shadow-lg sidebar">
+     <div class="footer-bar">
+       <app-sidebar></app-sidebar>
+     </div>
+    </aside>
+
+    <section class="content-wrapper bg-body-secondary">
+      <section class="bg-white rounded main-content">
+        <router-outlet></router-outlet>
+      </section>
+    </section>
+  </main>
+</section>

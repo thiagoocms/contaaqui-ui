@@ -1,1 +1,174 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'ngx-toastr/toastr' as toastr;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  user-select: none;
+}
+
+:root {
+  --color-primary: #002e5d;       /* Azul escuro do texto */
+  --color-secondary: #3a86ca;     /* Azul intermediário do ícone */
+  --color-accent: #00b168;        /* Verde da logo */
+  --text-title: #002e5d;
+  --text-body: #7a8497;
+  --bs-primary-rgb: 0, 46, 93;
+  --bs-secondary-rgb: 58, 134, 202;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background: #efefef;
+}
+
+.org-text-primary {
+  color: var(--color-primary);
+}
+
+.org-text-secondary {
+  color: var(--color-secondary);
+}
+
+.org-bg-primary {
+  background: var(--color-primary) !important;
+}
+
+.org-bg-secondary {
+  background: var(--color-secondary) !important;
+  color: #fff !important;
+}
+
+.fs-14 {
+  font-size: 0.875rem;
+}
+
+.fs-13 {
+  font-size: 0.8125rem;
+}
+
+.w-20 {
+  width: 20% !important;
+}
+
+.w-80 {
+  width: 80% !important;
+}
+
+.card-clean {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.summary-card {
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: #fff;
+  font-weight: 500;
+}
+
+.summary-income {
+  background: var(--color-accent);
+}
+
+.summary-expense {
+  background: #d9dee6;
+  color: var(--text-title);
+}
+
+.summary-balance {
+  background: var(--color-secondary);
+}
+
+.section-title {
+  color: var(--text-title);
+  font-weight: 600;
+}
+
+.btn-system {
+  background: var(--color-secondary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  transition: 0.2s ease;
+}
+
+.btn-system:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.form-control,
+.form-select {
+  border-radius: 8px;
+}
+
+.table thead {
+  background: #f4f6f9;
+  color: var(--text-title);
+}
+
+.bg-primary {
+  background: var(--color-primary) !important;
+  color: #fff !important;
+}
+
+.text-primary {
+  color: var(--color-primary) !important;
+}
+
+.bg-secondary {
+  background: var(--color-secondary) !important;
+  color: #fff !important;
+}
+
+.text-secondary {
+  color: var(--color-secondary) !important;
+}
+
+.btn-secondary {
+  background: var(--color-secondary);
+  color: #fff;
+  border: none;
+  transition: 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  transition: 0.2s ease;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.btn-outline-primary {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+.btn-outline-primary:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn-outline-secondary {
+  background: transparent;
+  color: var(--color-secondary);
+  border: 2px solid var(--color-secondary);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-secondary:hover {
+  background: var(--color-secondary);
+  color: #fff;
+}
+

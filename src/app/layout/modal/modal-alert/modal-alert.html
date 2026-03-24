@@ -1,0 +1,31 @@
+<div class="modal-header d-block py-1">
+    <div class="row">
+        <div class="col-md-12">
+            <h6 class="modal-title text-center my-1">
+                {{ title }}
+            </h6>
+        </div>
+    </div>
+</div>
+<main class="modal-body">
+    <div class="text-center">
+        <p class="mb-0">{{ message }}</p>
+    </div>
+</main>
+<div class="modal-footer">
+    @if (showButtonCancel) {
+      <app-button
+        [label]="labelButtonCancel"
+        severity="danger"
+        variant="outlined"
+        (onClick)="cancel()"
+      />
+    }
+    @if (showButtonConfirm) {
+      <app-button
+        [label]="labelButtonConfirm"
+        severity="primary"
+        (onClick)="confirm()"
+      />
+    }
+</div>

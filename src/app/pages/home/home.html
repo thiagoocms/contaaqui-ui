@@ -1,0 +1,248 @@
+<app-page
+  [pageTitle]="'Controle Financeiro'"
+  [pageButtons]="buttons"
+  [pageDescription]="'Gerencie suas finanças de forma simples e eficiente'"
+>
+  <!-- RESUMO -->
+  <div class="row mb-4 text-center">
+
+    <div class="col-md-4 mb-2">
+      <div class="summary-card summary-income card-clean">
+        <div class="fs-14">Entradas</div>
+        <h4>{{ totalIncome | currency:'BRL' }}</h4>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-2">
+      <div class="summary-card summary-expense card-clean">
+        <div class="fs-14">Saídas</div>
+        <h4>{{ totalExpense | currency:'BRL' }}</h4>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-2">
+      <div class="summary-card summary-balance card-clean">
+        <div class="fs-14">Saldo</div>
+        <h4>{{ balance | currency:'BRL' }}</h4>
+      </div>
+    </div>
+
+  </div>
+  <form [formGroup]="formFilter" class="col-12 mt-5">
+    <div class="row">
+      <div class="col-md-4 col-sm-9 mb-sm-2">
+        <app-input
+          formControlName="date"
+          label="Competência"
+          type="month"
+        />
+      </div>
+
+      <div class="col-md-4 col-sm-3 mt-2">
+        <app-button
+          variant="outlined"
+          label="Buscar"
+          severity="primary"
+          icon="search"
+          (onClick)="findAll()"
+        />
+      </div>
+
+    </div>
+  </form>
+
+  @for (transaction of transactions; track transaction.id) {
+
+    <app-card-item [item]="transaction"></app-card-item>
+  }
+
+
+</app-page>
+<app-modal #transactionModal title="Nova Transação" classFooter="">
+  <div body>
+    <form [formGroup]="form" class="m-3">
+
+      <div class="row mb-2">
+
+        <div class="col-md-6 col-sm-12 mb-sm-2">
+          <app-input
+            formControlName="type"
+            label="Tipo"
+            type="select"
+            [options]="[
+              { label: '', value: null },
+              { label: 'Entrada', value: TransactionType.INPUT },
+              { label: 'Saída', value: TransactionType.OUTPUT }
+            ]"
+          />
+        </div>
+
+        <div class="col-md-6 col-sm-12 mb-sm-2">
+          <app-input
+            formControlName="category"
+            label="Categoria"
+            type="autocomplete"
+            [searchFn]="searchCategories.bind(this)"
+            displayField="name"
+            displayFieldTooltip="description"
+          />
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-12 mb-3">
+          <app-input
+            formControlName="amount"
+            label="Valor"
+            step="0.01"
+            type="number"
+          />
+        </div>
+
+        <div class="col-md-6 col-sm-12 mb-sm-2">
+          <app-input
+            formControlName="date"
+            label="Data"
+            type="datetime-local"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div footer class="">
+    <div class="col d-flex justify-content-end mt-2">
+      <app-button
+        class="me-3"
+        icon="close"
+        label="Cancelar"
+        severity="danger"
+        variant="outlined"
+        (onClick)="modalService.hide()"
+      />
+      <app-button
+        class=""
+        icon="check"
+        label="Salvar"
+        severity="primary"
+        variant="outlined"
+        (onClick)="addTransaction()"
+      />
+    </div>
+  </div>
+</app-modal>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="container mt-4">-->
+
+<!--  &lt;!&ndash; Header &ndash;&gt;-->
+<!--  <div class="d-flex justify-content-between align-items-center mb-3">-->
+<!--    <div>-->
+<!--      <h4 class="mb-0">Registros</h4>-->
+<!--      <small class="text-muted">Gerencie suas movimentações</small>-->
+<!--    </div>-->
+
+<!--    <button class="btn btn-primary">-->
+<!--      + Novo Registro-->
+<!--    </button>-->
+<!--  </div>-->
+
+<!--  &lt;!&ndash; Filtros &ndash;&gt;-->
+<!--  <div class="card mb-3 p-3">-->
+<!--    <div class="row g-2 align-items-center">-->
+<!--      <div class="col-md-4">-->
+<!--        <input type="text" class="form-control" placeholder="Buscar...">-->
+<!--      </div>-->
+
+<!--      <div class="col-md-3">-->
+<!--        <input type="date" class="form-control">-->
+<!--      </div>-->
+
+<!--      <div class="col-md-3">-->
+<!--        <input type="date" class="form-control">-->
+<!--      </div>-->
+
+<!--      <div class="col-md-2 d-flex gap-2">-->
+<!--        <button class="btn btn-outline-secondary w-100">Limpar</button>-->
+<!--        <button class="btn btn-primary w-100">Buscar</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  &lt;!&ndash; Lista &ndash;&gt;-->
+<!--  <div class="card">-->
+
+<!--    <div *ngFor="let item of registros"-->
+<!--         class="registro-item d-flex justify-content-between align-items-center p-3 border-bottom">-->
+
+<!--      &lt;!&ndash; Info &ndash;&gt;-->
+<!--      <div>-->
+<!--        <div class="fw-semibold">{{ item.titulo }}</div>-->
+<!--        <small class="text-muted">{{ item.data }}</small>-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash; Tipo &ndash;&gt;-->
+<!--      <div>-->
+<!--        <span class="badge bg-light text-dark border">-->
+<!--          {{ item.tipo }}-->
+<!--        </span>-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash; Categoria &ndash;&gt;-->
+<!--      <div class="text-muted">-->
+<!--        {{ item.categoria }}-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash; Valor &ndash;&gt;-->
+<!--      <div class="fw-bold"-->
+<!--           [ngClass]="{-->
+<!--             'text-success': item.tipo === 'ENTRADA',-->
+<!--             'text-danger': item.tipo === 'SAIDA'-->
+<!--           }">-->
+<!--        {{ item.valor | currency:'BRL' }}-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash; Ações &ndash;&gt;-->
+<!--      <div class="d-flex gap-2">-->
+<!--        <button class="btn btn-sm btn-outline-primary">-->
+<!--          ✏️-->
+<!--        </button>-->
+<!--        <button class="btn btn-sm btn-outline-danger">-->
+<!--          🗑️-->
+<!--        </button>-->
+<!--      </div>-->
+
+<!--    </div>-->
+
+<!--  </div>-->
+
+<!--</div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

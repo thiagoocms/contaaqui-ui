@@ -1,0 +1,50 @@
+.invalid-field {
+    border: 0.8px solid #dc3545;
+}
+
+.error-message {
+    font-size: 0.7em;
+    margin-bottom: 0;
+    height: 1rem;
+    color: #dc3545;
+}
+
+.btn-red {
+    color: red;
+}
+
+.btn-green {
+    color: green;
+}
+
+[disabled] {
+    opacity: 0;
+    cursor: not-allowed;
+}
+
+h6 {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+button {
+    outline: none;
+}
+
+.modal-header,
+.modal-footer {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.modal-content {
+    height: fit-content !important;
+    width: 100% !important;
+}
+
+.container-modal {
+    z-index: 1001;
+}
+
+.container-modal .modal-content {
+    z-index: 1002;
+}
