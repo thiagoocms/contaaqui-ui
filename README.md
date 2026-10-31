@@ -1,59 +1,95 @@
-# ContaaquiUi
+# 💰 ContaAqui — Web (contaaqui-ui)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.2.
+> Plataforma de controle financeiro pessoal: registre entradas e saídas, organize por categorias e acompanhe o saldo da sua carteira.
 
-## Development server
+Este repositório contém o **front-end web** do ContaAqui.
 
-To start a local development server, run:
+| Repositório | Papel |
+|---|---|
+| [contaaqui-service](https://github.com/thiagoocms/contaaqui-service) | API REST: regras de negócio, autenticação e segurança |
+| [contaaqui-core](https://github.com/thiagoocms/contaaqui-core) | Biblioteca compartilhada: entidades, DTOs, repositórios e filtros dinâmicos |
+| **[contaaqui-ui](https://github.com/thiagoocms/contaaqui-ui)** (este) | Front-end web em Angular |
 
-```bash
-ng serve
+---
+
+## 🎯 Visão de negócio
+
+**Problema:** muita gente não sabe para onde vai o próprio dinheiro. Planilhas dão trabalho e os apps de banco mostram só uma conta.
+
+**Solução:** uma interface simples para o usuário:
+
+- **Criar a conta** num cadastro guiado por etapas, com validação de documento (CPF, RG ou CNH).
+- **Entrar com segurança:** login com usuário e senha e depois um **código de verificação enviado por e-mail** (2FA).
+- **Registrar entradas e saídas** e organizá-las por **categorias**.
+- **Visualizar a saúde financeira** num **dashboard** com gráficos: entradas × saídas por mês, saldo acumulado e gastos por categoria.
+
+---
+
+## 🛠️ Visão técnica
+
+### Stack
+- **Angular 21** + **TypeScript 5.9**
+- **RxJS** para comunicação assíncrona
+- **Bootstrap 5** para layout responsivo
+- **Chart.js** + **ng2-charts** para os gráficos
+- **Docker** + **Nginx** para servir a build de produção
+
+### Funcionalidades / telas
+| Tela | Descrição |
+|---|---|
+| **Cadastro** | Formulário em etapas com indicador de progresso e validação/máscara de documento |
+| **Login** | Autenticação com credenciais |
+| **MFA** | Confirmação do código enviado por e-mail |
+| **Home** | Visão geral com cards |
+| **Dashboard** | Gráficos de barras, linha, pizza e rosca |
+| **Categorias** | Listagem e gestão de categorias |
+
+### Arquitetura
+```
+src/app/
+├── layout/          # header, sidebar, wrapper, modais e componentes reutilizáveis
+│   └── components/  # button, input, table, toggle
+├── pages/           # auth (login, mfa, register), home, dashboard, categories
+└── shared/
+    ├── network/     # services e models por recurso (auth, user, wallet, transaction, category)
+    ├── interceptors/# tratamento global de erros e loading automático
+    ├── pipes/       # máscara de documento
+    └── validators/  # validação de documento
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Destaques:
+- **Lazy loading** dos módulos de páginas.
+- **Auth Guard** que protege as rotas autenticadas.
+- **Interceptors HTTP** que exibem o loading global e tratam os erros num só lugar.
+- **`BaseService` genérico** para consumir os CRUDs da API.
+- **Biblioteca própria de componentes** (botões, inputs, tabelas, modais de alerta e confirmação).
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## ▶️ Como rodar
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+**Pré-requisitos:** Node 20+ e a [API](https://github.com/thiagoocms/contaaqui-service) rodando.
 
 ```bash
-ng build
+npm install
+npm start          # http://localhost:4200
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+A URL da API fica em `src/environments/environment.ts` (`BASE_URL`).
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
+**Build de produção com Docker:**
 ```bash
-ng test
+docker build -t contaaqui-ui .
+docker run -p 80:80 contaaqui-ui
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## 🗺️ Próximos passos
+- [ ] Conectar o dashboard aos dados reais da API (hoje usa dados de exemplo)
+- [ ] Tela de lançamento e listagem de transações
+- [ ] Testes unitários dos componentes
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Desenvolvido por **[Thiago](https://github.com/thiagoocms)**
